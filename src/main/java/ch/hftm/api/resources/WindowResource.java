@@ -28,7 +28,7 @@ public class WindowResource {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Window> getWindow(@PathParam("id") Long id) {
+    public Window getWindow(@PathParam("id") Long id) {
         return Window.findById(id);
     }
 

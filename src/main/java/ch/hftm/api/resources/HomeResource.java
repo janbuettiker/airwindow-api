@@ -31,7 +31,7 @@ public class HomeResource {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Home> getHome(@PathParam("id") Long id) {
+    public Home getHome(@PathParam("id") Long id) {
         return Home.findById(id);
     }
 

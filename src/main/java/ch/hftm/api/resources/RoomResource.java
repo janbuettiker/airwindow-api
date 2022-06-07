@@ -28,7 +28,7 @@ public class RoomResource {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Room> getRoom(@PathParam("id") Long id) {
+    public Room getRoom(@PathParam("id") Long id) {
         return Room.findById(id);
     }
 
