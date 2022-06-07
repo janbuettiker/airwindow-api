@@ -32,4 +32,16 @@ public class Room extends PanacheEntityBase {
     public Room() {
         // Emtpy constructor for Panache
     }
+
+    public static List<Room> findAllRooms() {
+        return findAll().list();
+    }
+
+    public static Room findRoomById(Long id) {
+        return findById(id);
+    }
+
+    public static Boolean deleteRoomById(Long id) {
+        return deleteById(id);
+    }
 }

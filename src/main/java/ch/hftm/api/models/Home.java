@@ -27,4 +27,16 @@ public class Home extends PanacheEntityBase {
         // Emtpy constructor for Panache
     }
 
+    public static List<Home> findAllHomes() {
+        return findAll().list();
+    }
+
+    public static Home findHomeById(Long id) {
+        return findById(id);
+    }
+
+    public static Boolean deleteHomeById(Long id) {
+        return deleteById(id);
+    }
+
 }

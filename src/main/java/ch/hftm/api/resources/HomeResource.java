@@ -25,14 +25,14 @@ public class HomeResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Home> getHomes() {
-        return Home.listAll();
+        return Home.findAllHomes();
     }
 
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Home getHome(@PathParam("id") Long id) {
-        return Home.findById(id);
+        return Home.findHomeById(id);
     }
 
     @POST
@@ -50,7 +50,7 @@ public class HomeResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Home updateHome(@PathParam("id") Long id, Home home) {
-        Home entity = Home.findById(id);
+        Home entity = Home.findHomeById(id);
         if (entity == null) {
             throw new WebApplicationException("Entry with id of " + id + " does not exist.", 404);
         }
@@ -68,6 +68,6 @@ public class HomeResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public boolean deleteHome(@PathParam("id") Long id) {
-        return Home.deleteById(id);
+        return Home.deleteHomeById(id);
     }
 }

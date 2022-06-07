@@ -22,14 +22,14 @@ public class RoomResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Room> getRooms() {
-        return Room.listAll();
+        return Room.findAllRooms();
     }
 
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Room getRoom(@PathParam("id") Long id) {
-        return Room.findById(id);
+        return Room.findRoomById(id);
     }
 
     @POST
@@ -47,7 +47,7 @@ public class RoomResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Room updateRoom(@PathParam("id") Long id, Room room) {
-        Room entity = Room.findById(id);
+        Room entity = Room.findRoomById(id);
         if (entity == null) {
             throw new WebApplicationException("Entry with id of " + id + " does not exist.", 404);
         }
@@ -65,7 +65,7 @@ public class RoomResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public boolean deleteRoom(@PathParam("id") Long id) {
-        return Room.deleteById(id);
+        return Room.deleteRoomById(id);
     }
 
 }

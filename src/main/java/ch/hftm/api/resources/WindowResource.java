@@ -22,14 +22,14 @@ public class WindowResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Window> getWindows() {
-        return Window.listAll();
+        return Window.findAllWindows();
     }
 
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Window getWindow(@PathParam("id") Long id) {
-        return Window.findById(id);
+        return Window.findWindowById(id);
     }
 
     @POST
@@ -47,7 +47,7 @@ public class WindowResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Window updateWindow(@PathParam("id") Long id, Window window) {
-        Window entity = Window.findById(id);
+        Window entity = Window.findWindowById(id);
         if (entity == null) {
             throw new WebApplicationException("Entry with id of " + id + " does not exist.", 404);
         }
@@ -66,6 +66,6 @@ public class WindowResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public boolean deleteWindow(@PathParam("id") Long id) {
-        return Window.deleteById(id);
+        return Window.deleteWindowById(id);
     }
 }

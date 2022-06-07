@@ -1,5 +1,7 @@
 package ch.hftm.api.models;
 
+import java.util.List;
+
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,5 +31,17 @@ public class Window extends PanacheEntityBase {
 
     public Window() {
         // Emtpy constructor for Panache
+    }
+
+    public static List<Window> findAllWindows() {
+        return findAll().list();
+    }
+
+    public static Window findWindowById(Long id) {
+        return findById(id);
+    }
+
+    public static Boolean deleteWindowById(Long id) {
+        return deleteById(id);
     }
 }
