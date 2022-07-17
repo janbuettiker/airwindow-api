@@ -52,3 +52,6 @@ hs_err_pid*
 
 # Lets Encrypt SSL Certificate for Custom Domain
 lets-encrypt/
+
+# Local H2 Database file under deployments/
+deployments/
