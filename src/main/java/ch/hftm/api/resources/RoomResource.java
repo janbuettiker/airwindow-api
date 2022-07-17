@@ -11,9 +11,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
+import ch.hftm.api.models.Home;
 import ch.hftm.api.models.Room;
 
 @Path("/rooms")
@@ -36,8 +38,9 @@ public class RoomResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Room addRoom(Room room) {
-        room.persist();
+    public Room addRoom(Room room, @QueryParam("home-id") Long homeId) {
+        Home home = Home.findHomeById(homeId);
+        home.addRoom(room);
         return room;
     }
 
@@ -53,7 +56,6 @@ public class RoomResource {
         }
         entity.description = room.description;
         entity.name = room.name;
-        entity.home = room.home;
         entity.windowList = room.windowList;
 
         return entity;

@@ -1,16 +1,21 @@
 package ch.hftm.api.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
+@Table(name = "airwindow_home")
 public class Home extends PanacheEntityBase {
 
     @Id
@@ -20,8 +25,9 @@ public class Home extends PanacheEntityBase {
     public String description;
     public Integer postalCode;
 
-    @OneToMany(mappedBy = "home")
-    public List<Room> roomList;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "HOME_ID")
+    public List<Room> roomList = new ArrayList<>();
 
     public Home() {
         // Emtpy constructor for Panache
@@ -37,6 +43,10 @@ public class Home extends PanacheEntityBase {
 
     public static Boolean deleteHomeById(Long id) {
         return deleteById(id);
+    }
+
+    public void addRoom(Room room) {
+        roomList.add(room);
     }
 
 }

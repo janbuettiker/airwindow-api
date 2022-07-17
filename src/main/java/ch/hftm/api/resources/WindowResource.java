@@ -87,7 +87,6 @@ public class WindowResource {
         entity.name = window.name;
         entity.currentState = window.currentState;
         entity.desiredState = window.desiredState;
-        entity.room = window.room;
 
         return entity;
     }

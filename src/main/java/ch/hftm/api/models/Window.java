@@ -2,17 +2,17 @@ package ch.hftm.api.models;
 
 import java.util.List;
 
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import ch.hftm.api.models.enums.StateType;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
+@Table(name = "airwindow_window")
 public class Window extends PanacheEntityBase {
 
     @Id
@@ -24,10 +24,6 @@ public class Window extends PanacheEntityBase {
 
     public StateType currentState;
     public StateType desiredState;
-
-    @JsonbTransient
-    @ManyToOne
-    public Room room;
 
     public Window() {
         // Emtpy constructor for Panache

@@ -1,18 +1,21 @@
 package ch.hftm.api.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
+@Table(name = "airwindow_room")
 public class Room extends PanacheEntityBase {
 
     @Id
@@ -22,15 +25,20 @@ public class Room extends PanacheEntityBase {
     public String name;
     public String description;
 
-    @JsonbTransient
-    @ManyToOne
-    public Home home;
-
-    @OneToMany(mappedBy = "room")
-    public List<Window> windowList;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "ROOM_ID")
+    public List<Window> windowList = new ArrayList<>();
 
     public Room() {
         // Emtpy constructor for Panache
+    }
+
+    public void addWindow(Window window) {
+        windowList.add(window);
+    }
+
+    public void removeWindow(Window window) {
+        windowList.remove(window);
     }
 
     public static List<Room> findAllRooms() {
