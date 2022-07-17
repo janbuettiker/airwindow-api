@@ -75,7 +75,7 @@
 
 ## About The Project
 
-With the help of Quarkus, this api enables us to create a stateless API based on the REST architecture (as best as possible). The database is not really a topic that I will be able to cover as of now, so we will use H2 to run our database in memory within the same application container.
+With the help of Quarkus, this api enables us to create a stateless API based on the REST architecture (as best as possible). The database is not really a topic that I will be able to cover as of now, so we will use H2 to run our database in a file within the same application container.
 
 ### API Endpoints
 
@@ -108,8 +108,8 @@ https://randomnerdtutorials.com/esp32-http-get-post-arduino/
 ## Getting Started
 
 This service already runs in the cloud and is accessible through https://airwindow-api.jblabs.ch <br>
-The service is not really persistent as of now, maybe not even accessible.
-If you need to use it, contact me under jan.buettiker@hftm.ch
+You can directly start using it with the respective endpoints.
+If the database is empty. Run a http GET on https://airwindow-api.jblabs.ch/hello
 
 Or if this is just not necessary, here is a setup guide on how to run the api in dev mode locally.
 
