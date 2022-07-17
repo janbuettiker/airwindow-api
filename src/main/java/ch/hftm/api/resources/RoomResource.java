@@ -73,7 +73,6 @@ public class RoomResource {
         if (h.roomList.contains(r)) {
             r.name = room.name;
             r.description = room.description;
-            r.windowList = room.windowList;
             return r;
         } else {
             throw new WebApplicationException("Room with id: " + r.id + " does not exist in this room", 404);

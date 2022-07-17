@@ -57,7 +57,6 @@ public class HomeResource {
         entity.description = home.description;
         entity.name = home.name;
         entity.postalCode = home.postalCode;
-        entity.roomList = home.roomList;
 
         return entity;
     }
