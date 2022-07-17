@@ -19,23 +19,44 @@ public class GreetingResource {
     @Transactional
     public Home hello() {
 
-        Home home1 = new Home();
-        home1.name = "Bruchbude";
-        home1.description = "keine";
+        Home h1 = new Home();
+        h1.name = "HFTM Grenchen";
+        h1.description = "Schulgebäude in Grenchen";
 
-        Room room1 = new Room();
-        room1.name = "Badzimmer";
+        Room r1 = new Room();
+        r1.name = "Raum 325";
+        r1.description = "Schulraum PoE";
+        Room r2 = new Room();
+        r2.name = "Labor";
+        r2.description = "Science, Bitch";
 
-        Window window1 = new Window();
-        window1.name = "Fenster süd";
-        window1.currentState = StateType.OPEN;
+        Window w1 = new Window();
+        w1.name = "Fenster süd";
+        w1.currentState = StateType.OPEN;
+        w1.desiredState = StateType.OPEN;
+        w1.description = "Frosch sagt hallo";
 
-        home1.addRoom(room1);
-        room1.addWindow(window1);
+        Window w2 = new Window();
+        w2.name = "Dachfenster Nord";
+        w2.currentState = StateType.ANGLED;
+        w2.desiredState = StateType.OPEN;
+        w2.description = "Cooles Fenster";
 
-        home1.persist();
+        Window w3 = new Window();
+        w3.name = "Fenster Türe";
+        w3.currentState = StateType.CLOSED;
+        w3.desiredState = StateType.OPEN;
+        w3.description = "Über der Türe";
 
-        return home1;
+        h1.addRoom(r1);
+        h1.addRoom(r2);
+        r1.addWindow(w1);
+        r2.addWindow(w2);
+        r2.addWindow(w3);
+
+        h1.persist();
+
+        return h1;
 
     }
 }
