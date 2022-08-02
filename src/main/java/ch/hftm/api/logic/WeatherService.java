@@ -1,19 +1,29 @@
 package ch.hftm.api.logic;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.QueryParam;
+import javax.enterprise.context.ApplicationScoped;
 
-import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 
-import ch.hftm.api.models.weather.Root;
+import ch.hftm.api.models.Window;
+import ch.hftm.api.models.enums.StateType;
 
-@RegisterRestClient(configKey = "weatherapi")
-public interface WeatherService {
+@ApplicationScoped
+public class WeatherService {
 
-    @GET
-    Root getWeatherByCity(
-            @QueryParam("key") String apiKey,
-            @QueryParam("q") String city,
-            @QueryParam("aqi") String aqi);
+    @RestClient
+    WeatherApi weatherApi;
+
+    private final String API_KEY = "b6dc63b8d3dd444caed124552220208";
+    private final String AQI = "no";
+    private final String CITY = "Zurich";
+
+    public void updateWindowStatus(Window w) {
+
+        if (weatherApi.getWeatherByCity(API_KEY, CITY, AQI).current.condition.text.contains("rain")
+                && Boolean.TRUE.equals(w.weatherAware)) {
+
+            w.desiredState = StateType.CLOSED;
+        }
+    }
 
 }

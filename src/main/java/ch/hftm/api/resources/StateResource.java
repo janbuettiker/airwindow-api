@@ -1,5 +1,6 @@
 package ch.hftm.api.resources;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import javax.ws.rs.GET;
@@ -11,12 +12,16 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
+import ch.hftm.api.logic.WeatherService;
 import ch.hftm.api.models.Window;
 import ch.hftm.api.models.enums.State;
 import ch.hftm.api.models.enums.StateType;
 
 @Path("/windows/{id}/state")
 public class StateResource {
+
+    @Inject
+    WeatherService weatherService;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
@@ -25,6 +30,7 @@ public class StateResource {
             @QueryParam("state") @Valid State state) {
 
         Window w = Window.findWindowById(windowId);
+        weatherService.updateWindowStatus(w);
 
         if (state.equals(State.CURRENT)) {
             return "Current state: " + w.currentState;

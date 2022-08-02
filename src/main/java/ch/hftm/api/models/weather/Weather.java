@@ -1,6 +1,6 @@
 package ch.hftm.api.models.weather;
 
-public class Root {
+public class Weather {
     public Location location;
     public Current current;
 }

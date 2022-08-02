@@ -75,6 +75,7 @@ public class WindowResource {
             w.description = window.description;
             w.currentState = window.currentState;
             w.desiredState = window.desiredState;
+            w.weatherAware = window.weatherAware;
             return w;
         } else {
             throw new WebApplicationException("Window with id: " + w.id + " does not exist in this room", 404);

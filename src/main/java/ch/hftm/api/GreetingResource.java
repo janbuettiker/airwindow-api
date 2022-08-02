@@ -39,6 +39,7 @@ public class GreetingResource {
             w1.currentState = StateType.OPEN;
             w1.desiredState = StateType.OPEN;
             w1.description = "Frosch sagt hallo";
+            w1.weatherAware = true;
 
             Window w2 = new Window();
             w2.name = "Dachfenster Nord";
