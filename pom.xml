@@ -29,6 +29,11 @@
   <dependencies>
     <dependency>
       <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-quartz</artifactId>
+      <version>2.11.1.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-rest-client-reactive-jsonb</artifactId>
       <version>2.11.1.Final</version>
     </dependency>
