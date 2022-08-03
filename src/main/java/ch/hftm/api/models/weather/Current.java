@@ -1,5 +1,8 @@
 package ch.hftm.api.models.weather;
 
+/**
+ * Current weather data from https://weatherapi.com
+ */
 public class Current {
     public int last_updated_epoch;
     public String last_updated;

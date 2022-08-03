@@ -15,6 +15,14 @@ import ch.hftm.api.models.enums.StateType;
 @Path("/demo")
 public class DemoResource {
 
+    /**
+     * Creates demo data if there is no home available.
+     * For the prototype, we only use one home in the app so we only create one
+     * home.
+     * Can only be triggered once, else a http 500 error will be thrown.
+     * 
+     * @return Home
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional

@@ -1,5 +1,8 @@
 package ch.hftm.api.models.weather;
 
+/**
+ * Location information from https://weatherapi.com
+ */
 public class Location {
     public String name;
     public String region;

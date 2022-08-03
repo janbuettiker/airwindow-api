@@ -22,12 +22,23 @@ public class HomeResource {
 
     EntityManager manager;
 
+    /**
+     * Returns all Homes
+     * 
+     * @return List<Home>
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Home> getHomes() {
         return Home.findAllHomes();
     }
 
+    /**
+     * Returns home with the id defined in the parameter
+     * 
+     * @param id
+     * @return Home
+     */
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -35,6 +46,12 @@ public class HomeResource {
         return Home.findHomeById(id);
     }
 
+    /**
+     * Creates a new home
+     * 
+     * @param home
+     * @return Home
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -44,6 +61,13 @@ public class HomeResource {
         return home;
     }
 
+    /**
+     * Updates a home's information
+     * 
+     * @param id
+     * @param home
+     * @return Home
+     */
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -61,6 +85,12 @@ public class HomeResource {
         return entity;
     }
 
+    /**
+     * Deletes the home with the defined id in the parameter
+     * 
+     * @param id
+     * @return boolean
+     */
     @DELETE
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)

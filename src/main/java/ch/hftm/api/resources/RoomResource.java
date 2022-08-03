@@ -21,12 +21,26 @@ import ch.hftm.api.models.Room;
 @Path("homes/{homeId}/rooms")
 public class RoomResource {
 
+    /**
+     * Lists all rooms of the house defined in the path parameter
+     * 
+     * @param homeID
+     * @return List<Room>
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Room> getRooms(@PathParam("homeId") Long homeID) {
         return Home.findHomeById(homeID).roomList;
     }
 
+    /**
+     * Returns the room with the defined room id
+     * Only returns the room, if the room is part of the defined home id
+     * 
+     * @param homeid
+     * @param roomid
+     * @return Room
+     */
     @GET
     @Path("/{roomId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -44,6 +58,13 @@ public class RoomResource {
         }
     }
 
+    /**
+     * Create a new room within the given home
+     * 
+     * @param homeid
+     * @param room
+     * @return Room
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -57,6 +78,13 @@ public class RoomResource {
         return room;
     }
 
+    /**
+     * Update room information
+     * 
+     * @param homeid
+     * @param roomid
+     * @return Room
+     */
     @PUT
     @Path("/{roomId}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -79,6 +107,14 @@ public class RoomResource {
         }
     }
 
+    /**
+     * Removes the room with the given id.
+     * Only removes the room, if it is part of the given home id
+     * 
+     * @param roomid
+     * @param homeid
+     * @return boolean
+     */
     @DELETE
     @Path("/{roomId}")
     @Consumes(MediaType.APPLICATION_JSON)

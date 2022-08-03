@@ -24,6 +24,13 @@ public class ScheduleResource {
     @Inject
     ScheduleService scheduleService;
 
+    /**
+     * Gets all task associated to the given window.
+     * Tasks are only listed after they have been triggered!
+     * 
+     * @param windowId
+     * @return List<Task>
+     */
     @GET
     public List<Task> listAll(@PathParam("id") Long windowId) {
 
@@ -38,6 +45,15 @@ public class ScheduleResource {
         return windowTasks;
     }
 
+    /**
+     * Creates a one time task. This task will run in the given amount of minutes in
+     * the future from when the task is run.
+     * 
+     * @param windowId
+     * @param inMin    - In how many minutes should the task run
+     * @param st       - Open or close the window
+     * @return Boolean
+     */
     @POST
     @Path("/ot")
     public Boolean createOneTimeTask(@PathParam("id") Long windowId, @QueryParam("inMin") Integer inMin,
@@ -52,6 +68,16 @@ public class ScheduleResource {
         }
     }
 
+    /**
+     * Creates a scheduled task that will run every day at the given time.
+     * The time is configured through hour and minute..
+     * 
+     * @param windowId
+     * @param hour     - Hour between 0 - 23
+     * @param minute   - Minute between 0 - 59
+     * @param st       - Open or close the window
+     * @return Boolean
+     */
     @POST
     @Path("/st")
     public Boolean createScheduledTask(@PathParam("id") Long windowId, @QueryParam("h") Integer hour,

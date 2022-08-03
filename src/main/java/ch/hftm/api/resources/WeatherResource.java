@@ -9,6 +9,10 @@ import ch.hftm.api.logic.WeatherApi;
 import ch.hftm.api.models.weather.Weather;
 import io.smallrye.common.annotation.Blocking;
 
+/**
+ * More or less only used for debugging
+ * Gets the data of the city Zurich
+ */
 @Path("/weather")
 public class WeatherResource {
 
@@ -18,6 +22,11 @@ public class WeatherResource {
     @RestClient
     WeatherApi weatherApi;
 
+    /**
+     * Gets weather from https://weatherapi.com
+     * 
+     * @return Weather
+     */
     @GET
     @Blocking
     public Weather getWeather() {

@@ -21,12 +21,26 @@ import ch.hftm.api.models.Window;
 @Path("/rooms/{roomId}/windows")
 public class WindowResource {
 
+    /**
+     * Gets all windows in the given room
+     * 
+     * @param roomId
+     * @return List<Window>
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Window> getWindows(@PathParam("roomId") Long roomId) {
         return Room.findRoomById(roomId).windowList;
     }
 
+    /**
+     * Gets the window with the given id.
+     * Only returns the window, if it is associated to the given room.
+     * 
+     * @param roomId
+     * @param windowId
+     * @return Window
+     */
     @GET
     @Path("/{windowId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -44,6 +58,13 @@ public class WindowResource {
         }
     }
 
+    /**
+     * Adds a window to the given room
+     * 
+     * @param roomId
+     * @param window
+     * @return Window
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -58,6 +79,14 @@ public class WindowResource {
         return window;
     }
 
+    /**
+     * Updates window information.
+     * This will only work, if the window is associated to the given room.
+     * 
+     * @param roomId
+     * @param windowId
+     * @return Window
+     */
     @PUT
     @Path("/{windowId}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -83,6 +112,14 @@ public class WindowResource {
 
     }
 
+    /**
+     * Removes the window with the given id.
+     * Only works, if the window is associated to the room.
+     * 
+     * @param roomId
+     * @param windowId
+     * @return boolean
+     */
     @DELETE
     @Path("/{windowId}")
     @Consumes(MediaType.APPLICATION_JSON)
