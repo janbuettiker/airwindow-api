@@ -14,12 +14,11 @@ public class WeatherService {
     WeatherApi weatherApi;
 
     private final String API_KEY = "b6dc63b8d3dd444caed124552220208";
-    private final String AQI = "no";
     private final String CITY = "Zurich";
 
     public void updateWindowStatus(Window w) {
 
-        if (weatherApi.getWeatherByCity(API_KEY, CITY, AQI).current.condition.text.contains("rain")
+        if (weatherApi.getWeatherByCity(API_KEY, CITY).current.condition.text.contains("rain")
                 && Boolean.TRUE.equals(w.weatherAware)) {
 
             w.desiredState = StateType.CLOSED;
