@@ -4,8 +4,6 @@ public enum StateType {
 
     OPEN {
     },
-    ANGLED {
-    },
     CLOSED {
     };
 }

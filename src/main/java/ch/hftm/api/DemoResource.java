@@ -41,8 +41,8 @@ public class DemoResource {
 
             Window w2 = new Window();
             w2.name = "Dachfenster Nord";
-            w2.currentState = StateType.ANGLED;
-            w2.desiredState = StateType.OPEN;
+            w2.currentState = StateType.OPEN;
+            w2.desiredState = StateType.CLOSED;
             w2.description = "Cooles Fenster";
 
             Window w3 = new Window();
