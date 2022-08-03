@@ -1,5 +1,6 @@
 package ch.hftm.api.resources;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import javax.ws.rs.GET;
@@ -11,13 +12,32 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
+import ch.hftm.api.logic.WeatherService;
 import ch.hftm.api.models.Window;
 import ch.hftm.api.models.enums.State;
 import ch.hftm.api.models.enums.StateType;
 
+/**
+ * This is the resource that will be used by the window controller.
+ * The controller will check the desired window state with the GET function.
+ * It then compares the desired state to the current state and if necessary,
+ * opens or closes the window.
+ * 
+ * Afterwards, the controller will set the current state of the window.
+ */
 @Path("/windows/{id}/state")
 public class StateResource {
 
+    @Inject
+    WeatherService weatherService;
+
+    /**
+     * Gets the state of a given window
+     * 
+     * @param windowId
+     * @param state    - Desired or current state
+     * @return String
+     */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getWindowState(
@@ -25,6 +45,9 @@ public class StateResource {
             @QueryParam("state") @Valid State state) {
 
         Window w = Window.findWindowById(windowId);
+        // Check the weather API if it is raining, if so, we set the desired state to
+        // closed through this service bean.
+        weatherService.updateWindowStatus(w);
 
         if (state.equals(State.CURRENT)) {
             return "Current state: " + w.currentState;
@@ -35,6 +58,14 @@ public class StateResource {
         }
     }
 
+    /**
+     * Sets the state of a given window
+     * 
+     * @param windowId
+     * @param state    - Set desired or current state
+     * @param value    - To the desired value of open or closed
+     * @return String
+     */
     @PATCH
     @Produces(MediaType.TEXT_PLAIN)
     @Transactional

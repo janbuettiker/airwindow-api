@@ -25,8 +25,11 @@ public class Window extends PanacheEntityBase {
     public StateType currentState;
     public StateType desiredState;
 
+    public Boolean weatherAware;
+
     public Window() {
         // Emtpy constructor for Panache
+        weatherAware = false;
     }
 
     public static List<Window> findAllWindows() {

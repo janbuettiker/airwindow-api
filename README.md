@@ -77,6 +77,22 @@
 
 With the help of Quarkus, this api enables us to create a stateless API based on the REST architecture (as best as possible). The database is not really a topic that I will be able to cover as of now, so we will use H2 to run our database in a file within the same application container.
 
+### Business Logic
+
+We want to have some logic from the backend and not only track some POJOS. For this, we have implemented two functionalities that will alter the window desired status.
+
+#### Tasks
+
+Using quarkus quartz, we can create one-timed and scheduled tasks.
+These tasks are used in the app to manipulate the window in the future and not instantly.
+
+- One Time Task - Open or close the window in a given amount of minutes
+- Scheduled Task - Open or close the window daily at a given time
+
+#### Weather API
+
+Using https://weatherapi.com we check the weather in Zurich each time the desired status of a window is requested. This allows us to close the window if it should rain. This is only done, if the user has set his window to be "weatherAware" which is a switch in the airwindow-app.
+
 ### API Endpoints
 
 The api covers two kind of endpoints as of now
@@ -109,7 +125,7 @@ https://randomnerdtutorials.com/esp32-http-get-post-arduino/
 
 This service already runs in the cloud and is accessible through https://airwindow-api.jblabs.ch <br>
 You can directly start using it with the respective endpoints.
-If the database is empty. Run a http GET on https://airwindow-api.jblabs.ch/hello
+If the database is empty. Run a http GET on https://airwindow-api.jblabs.ch/demo
 
 Or if this is just not necessary, here is a setup guide on how to run the api in dev mode locally.
 
@@ -179,7 +195,7 @@ This will include following goodies:
 - Requests for Home, Room, Window and State resources
 - Two environments with local url and cloud url config
 
-1. Import the file found here: [Insomnia Export](_doc/insomnia/API-Doc-Export_2022-07-17.json) <br>
+1. Import the file found here: [Insomnia Export](_doc/insomnia/API-Doc-Export_2022-08-03.json) <br>
 2. Install insomnia
    ```sh
    brew install insomnia
@@ -236,8 +252,9 @@ Desired state: CLOSED
 - [ ] API KEY
 - [ ] Persistent Datasource
 - [ ] Error Handling and Validation
-- [ ] Business Logic
-  - [ ] 3rd Party Weather API
+- [x] Business Logic
+  - [x] 3rd Party Weather API
+  - [x] Tasks (Open Close in the future or on schedule)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
