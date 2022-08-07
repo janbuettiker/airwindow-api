@@ -86,7 +86,10 @@ public class ScheduleService {
                                 .withSchedule(DailyTimeIntervalScheduleBuilder
                                                 .dailyTimeIntervalSchedule()
                                                 .onEveryDay()
-                                                .startingDailyAt(TimeOfDay.hourAndMinuteOfDay(hour, minute)))
+                                                .startingDailyAt(TimeOfDay.hourAndMinuteOfDay(hour, minute))
+                                                // for whatever reason, without this interval, the schedule gets
+                                                // triggered every minute
+                                                .withIntervalInHours(24))
                                 .forJob(job)
                                 .build();
 
