@@ -30,7 +30,7 @@ public class RoomResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Room> getRooms(@PathParam("homeId") Long homeID) {
-        return Home.findHomeById(homeID).roomList;
+        return Room.find("home_id = ?1", homeID).list();
     }
 
     /**
